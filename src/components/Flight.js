@@ -1,11 +1,13 @@
-import ('../Flight.css');
+import { DateTime } from 'luxon';
+import('../Flight.css');
+
 
 function Flight(props) {
 
   return (
     <div className="Flight">
-      <p>from: {props.flight.flyFrom}</p>
-      <p>to: {props.flight.flyTo}</p>
+      <p>from: {props.flight.flyFrom} {DateTime.fromMillis(props.flight.dTime * 1000).toFormat('hh:mm')}</p>
+      <p>to: {props.flight.flyTo} {DateTime.fromMillis(props.flight.aTime * 1000).toFormat('hh:mm')}</p>
       <p>duration: {props.flight.fly_duration}</p>
       <p>distance: {props.flight.distance}</p>
       <p>price: {props.flight.price}</p>
