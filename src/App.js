@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Destination from './components/Destination';
 import OriginDestination from './components/OriginDestination';
+import Flight from './components/Flight';
 
 function App() {
   const [flights, setFlights] = useState(null);
@@ -14,6 +15,8 @@ function App() {
     const resp = await fetch(url);
     const data = await resp.json();
     setFlights(data);
+    console.log(flights);
+    console.log(data);
   }
 
   async function fetchDestination() {
@@ -27,12 +30,28 @@ function App() {
     fetchAll();
   }, []);
 
+  useEffect(() => {
+    fetchAll();
+  }, [destination]);
+
   return (
     <div className="App">
      
       <Destination setDestination={setDestination} />
 
       <OriginDestination setOriginDestination={setOriginDestination}/>
+      {/* <Destination setDestination={setDestination} /> */}
+
+      { flights ? 
+      <div>
+
+        {flights.data.map((flight, i)=>  
+        <Flight flight={flight} key={i} />) }
+
+        </div>
+      :
+      
+      <p>loading</p>}
      
     </div>
   );
