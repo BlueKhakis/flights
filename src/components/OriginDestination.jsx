@@ -7,7 +7,7 @@ function OriginDestination(props) {
         <select onChange={(event) =>  props.setOriginDestination(event.target.value)} id="filter" name="filter">
             <option value="all" >All</option>
             <option value="PRG" >Prague</option>
-            <option value="SFX" >Berlin</option>
+            <option value="SXF" >Berlin</option>
             <option value="WAW" >Warsaw</option>
             <option value="PED" >Pardubice</option>
         </select>
