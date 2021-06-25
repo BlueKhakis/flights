@@ -1,4 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 .Flight {
   background-color: lightblue;
   width: 300px;
+  border-radius: 5%;
+  padding: auto;
+  margin: 10px;
 }
