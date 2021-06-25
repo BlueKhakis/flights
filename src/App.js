@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Flight from './components/Flight';
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
   const url = "https://api.skypicker.com/flights?flyFrom=PRG&to=LGW&dateFrom=18/11/2021&dateTo=12/12/2021&partner=data4youcbp202106&v=3";
 =======
 
+=======
+import Destination from './components/Destination';
+>>>>>>> 51acec975975701013506e71879f623c54437b70
 
 function App() {
   const [flights, setFlights] = useState(null);
@@ -40,7 +44,7 @@ function App() {
      }
 =======
      
-       
+      <Destination />
      
 >>>>>>> 07ca91f700f75fbd76f41cbd4b1eed87d24237f1
     </div>
