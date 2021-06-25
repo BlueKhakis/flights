@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Destination from './components/Destination';
 import { DateTime } from 'luxon';
+import Flight from './Flight'
 
 function App() {
   const [flights, setFlights] = useState(null);
@@ -12,6 +13,8 @@ function App() {
     const resp = await fetch(url);
     const data = await resp.json();
     setFlights(data);
+    console.log(flights);
+    console.log(data);
   }
 
   useEffect(() => {
@@ -25,17 +28,18 @@ function App() {
   return (
     <div className="App">
      
-      <Destination setDestination={setDestination} />
+      {/* <Destination setDestination={setDestination} /> */}
 
-      {flights ?
-        <div>
-          Departure time
-        <p>{DateTime.fromMillis(flights.data[0].dTime * 1000).toFormat('hh:mm')}</p>
-        Arrival time
-          <p>{DateTime.fromMillis(flights.data[0].aTime * 1000).toFormat('hh:mm')}</p>
-          <p>{flights.data[0].country}</p>
+      { flights ? 
+      <div>
+
+        {flights.data.map((flight, i)=>  
+        <Flight flight={flight} key={i} />) }
+
         </div>
-          : <p>loading</p>}
+      :
+      
+      <p>loading</p>}
      
     </div>
   );
