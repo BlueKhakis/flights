@@ -1,25 +1,29 @@
+import { useEffect } from "react";
+
+import Destination from "./Destination";
+import OriginDestination from "./OriginDestination";
+
+
+
+
 function Button(props)
 {
-    function handleSubmit(event)
-    {
-        event.preventDefault()
-        event.target.blur()
 
-        
-        //window.location.href = `/${props.index}`; console.log('string')
-    }
-
+    
+    
     return (
-        
-        <form className="Button" onSubmit={(event) => handleSubmit(event)}>
+        <div className="button">
 
-            <input name="flightSearch" onChange={(event) => props.setDestination(event.target.value)} />
-      
-             <button onClick={(event) => handleSubmit(event)}> Submit Your F Flight</button >
-     
-        </form>      
-        
+            <div className="container">
+
+                <div className="trick">
+    
+                <button onClick={() => props.fetchDestination()}> Submit Your F Flight</button >
+            </div>
+         </div>
+        </div>    
     )
 }
+
 
 export default Button;
