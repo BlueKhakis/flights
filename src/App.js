@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Destination from './components/Destination';
 import OriginDestination from './components/OriginDestination';
+import SearchBar from './components/SearchBar';
 import LoadMoreButton from './components/LoadMoreButton'
 import Flight from './components/Flight';
 import { DateTime } from 'luxon';
@@ -15,12 +16,23 @@ function App() {
   const [destination, setDestination] = useState('VLC');
   const [originDestination, setOriginDestination] = useState('PRG');
   const [direct, setDirect] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('PRG');
 
   async function fetchDestination() {
     const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=${limit}&sort=date&asc=1&direct_flights=${direct}`);
     const data = await results.json();
-    console.log(data);
+    
     setFlights(data);
+
+    console.log(flights)
+  }
+
+  async function fetchSearch() {
+    const results = await fetch(`https://api.skypicker.com/locations?term=${searchQuery}&locale=en-US&location_types=airport&location_types=city&location_types=country&limit=10&active_only=true&sort=name`);
+    const data = await results.json();
+    
+    setFlights(data);
+    console.log(flights)
   }
 
   // useEffect(() => {
@@ -30,11 +42,18 @@ function App() {
 
 
 
+  useEffect(() => {
+    
+    fetchSearch();
+  }, [searchQuery, direct]);
+
   return (
     <div className="App">
      
       
       {/* <Destination setDestination={setOriginDestination} /> */}
+
+      <SearchBar setSearchQuery={setSearchQuery}/>
 
       <OriginDestination setOriginDestination={setOriginDestination} />
       
@@ -44,16 +63,19 @@ function App() {
 
       <Button fetchDestination={fetchDestination}/>
 
-      { flights ? 
+      { flights ?  
           <div>
-            {!flights.data.length ?
+            {!flights.length ?
               <p>no flights for selected route</p>
               :
               <div>
-              {flights.data.map((flight, i)=>  
+              {flights.map((flight, i)=>  
                 <Flight flight={flight} key={i} />)
             }
-                <LoadMoreButton setLimit={setLimit} limit={limit} />
+                {flights.data.length >= limit ?
+                <LoadMoreButton setLimit={setLimit} limit={limit} /> :
+                  <></>
+                }
               </div>
             }
           </div> :
