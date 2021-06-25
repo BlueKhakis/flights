@@ -16,13 +16,14 @@ function App() {
   const [originDestination, setOriginDestination] = useState('PRG');
   const [direct, setDirect] = useState(0);
   const [searchQuery, setSearchQuery] = useState('PRG');
+  const [searchResults, setSearchResults] = useState(null);
+
 
   async function fetchDestination() {
     const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=${limit}&sort=date&asc=1&direct_flights=${direct}`);
     const data = await results.json();
     
     setFlights(data);
-
     console.log(flights)
   }
 
@@ -30,9 +31,12 @@ function App() {
     const results = await fetch(`https://api.skypicker.com/locations?term=${searchQuery}&locale=en-US&location_types=airport&location_types=city&location_types=country&limit=10&active_only=true&sort=name`);
     const data = await results.json();
     
-    setFlights(data);
+    setSearchResults(data);
     console.log(flights)
   }
+
+
+
 
   useEffect(() => {
     
@@ -42,6 +46,8 @@ function App() {
   useEffect(() => {
     
     fetchSearch();
+    console.log(searchQuery)
+    console.log(searchResults)
   }, [searchQuery, direct]);
 
   return (
@@ -58,11 +64,11 @@ function App() {
 
       { flights ?  
           <div>
-            {!flights.length ?
+            {!flights.data.length ?
               <p>no flights for selected route</p>
               :
               <div>
-              {flights.map((flight, i)=>  
+              {flights.data.map((flight, i)=>  
                 <Flight flight={flight} key={i} />)
             }
                 {flights.data.length >= limit ?

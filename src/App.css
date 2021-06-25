@@ -3,9 +3,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("https://news.paxeditions.com/storage/app/uploads/public/5ef/dea/ed6/thumb_105722_1200_1_0_0_auto.jpg");
+  /* background-image: url("https://news.paxeditions.com/storage/app/uploads/public/5ef/dea/ed6/thumb_105722_1200_1_0_0_auto.jpg"); */
   background-size: contain;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 100vw;
+
+  height: 100vh;
 }
 
 .App-logo {
