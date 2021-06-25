@@ -7,6 +7,7 @@ import LoadMoreButton from './components/LoadMoreButton'
 import Flight from './components/Flight';
 import { DateTime } from 'luxon';
 import DirectButton from './components/DirectButton'
+import Button from './components/Button';
 
 function App() {
   const [flights, setFlights] = useState(null);
@@ -16,7 +17,8 @@ function App() {
   const [originDestination, setOriginDestination] = useState('PRG');
   const [direct, setDirect] = useState(0);
   const [searchQuery, setSearchQuery] = useState('PRG');
-  const [searchResults, setSearchResults] = useState()
+  const [searchResults, setSearchResults] = useState(null);
+
 
   async function fetchDestination() {
     const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=${limit}&sort=date&asc=1&direct_flights=${direct}`);
@@ -25,24 +27,32 @@ function App() {
     setFlights(data);
 
     console.log(data)
+    console.log(flights)
   }
 
   async function fetchSearch() {
     const results = await fetch(`https://api.skypicker.com/locations?term=${searchQuery}&locale=en-US&location_types=airport&location_types=city&location_types=country&limit=10&active_only=true&sort=name`);
     const data = await results.json();
     
-    setFlights(data);
+    setSearchResults(data);
     console.log(flights)
+
+
   }
+
+
+
 
   useEffect(() => {
     
     fetchDestination();
-  }, [destination, originDestination, limit, direct]);
+  }, [direct]);
 
   useEffect(() => {
     
     fetchSearch();
+    console.log(searchQuery)
+    console.log(searchResults)
   }, [searchQuery, direct]);
 
   return (
@@ -55,11 +65,12 @@ function App() {
 
       <OriginDestination setOriginDestination={setOriginDestination} />
       Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
-
+  
+      <Button fetchDestination={fetchDestination}/>
 
       { flights ?  
           <div>
-            {flights.data && !flights.data.length ?
+            {!flights.data.length ?
               <p>no flights for selected route</p>
               :
               <div>
