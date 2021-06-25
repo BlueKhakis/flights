@@ -23,7 +23,7 @@ function App() {
     
     setFlights(data);
 
-    console.log(flights)
+    console.log(data)
   }
 
   async function fetchSearch() {
@@ -58,11 +58,11 @@ function App() {
 
       { flights ?  
           <div>
-            {!flights.length ?
+            {flights.data && !flights.data.length ?
               <p>no flights for selected route</p>
               :
               <div>
-              {flights.map((flight, i)=>  
+              {flights.data.map((flight, i)=>  
                 <Flight flight={flight} key={i} />)
             }
                 {flights.data.length >= limit ?
