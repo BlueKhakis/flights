@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Alert from './Alert';
 
 function App() {
   return (
