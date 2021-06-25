@@ -26,7 +26,6 @@ function DetailButton(props)
             className="form-check-input"
         />
         
-        {console.log(props.direct)}
       </>  
     )
 }
