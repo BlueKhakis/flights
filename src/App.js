@@ -46,7 +46,10 @@ function App() {
               {flights.data.map((flight, i)=>  
                 <Flight flight={flight} key={i} />)
             }
-                <LoadMoreButton setLimit={setLimit} limit={limit} />
+                {flights.data.length >= limit ?
+                <LoadMoreButton setLimit={setLimit} limit={limit} /> :
+                  <></>
+                }
               </div>
             }
           </div> :
