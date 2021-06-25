@@ -3,7 +3,7 @@ import {useState} from 'react';
 function OriginDestination(props) {
   return (
     <div className="OriginDestination">
-      <label for="OriginDestination">Choose a departure:</label>
+      <label for="OriginDestination">FLY FROM:</label>
         <select onChange={(event) =>  props.setOriginDestination(event.target.value)} id="filter" name="filter">
             <option value="all" >All</option>
             <option value="PRG" >Prague</option>

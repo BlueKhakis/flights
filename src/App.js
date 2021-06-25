@@ -24,17 +24,15 @@ function App() {
     const data = await results.json();
     
     setFlights(data);
-    console.log(flights)
   }
 
   async function fetchSearch() {
-    const results = await fetch(`https://api.skypicker.com/locations?term=${searchQuery}&locale=en-US&location_types=airport&location_types=city&location_types=country&limit=10&active_only=true&sort=name`);
+    const results = await fetch(`https://api.skypicker.com/locations?term=${searchQuery}&locale=en-US&location_types=airport&limit=1000&active_only=true&sort=name`);
     const data = await results.json();
     
-    setSearchResults(data);
-    console.log(flights)
-
-
+    // setSearchResults(data)
+    // setDestination(data ? data.locations[0].id : 'VLC');
+    setDestination(data ? data.locations[0].id : '');
   }
 
 
@@ -43,24 +41,27 @@ function App() {
   useEffect(() => {
     
     fetchDestination();
-  }, [direct]);
+  }, [direct, destination]);
 
   useEffect(() => {
     
     fetchSearch();
-    console.log(searchQuery)
-    console.log(searchResults)
+    // console.log(searchQuery)
+    // console.log(searchResults)
   }, [searchQuery, direct]);
 
   return (
+    
     <div className="App">
-     
+      {console.log(destination)}
+      
+      <OriginDestination setOriginDestination={setOriginDestination} />
       <Destination setDestination={setDestination} />
       {/* <Destination setDestination={setOriginDestination} /> */}
 
       <SearchBar setSearchQuery={setSearchQuery}/>
 
-      <OriginDestination setOriginDestination={setOriginDestination} />
+      
       Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
   
       <Button fetchDestination={fetchDestination}/>

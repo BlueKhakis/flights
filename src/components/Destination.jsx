@@ -3,7 +3,7 @@ import {useState} from 'react';
 function Destination(props) {
   return (
     <div className="Destination">
-      <label for="Destination">Choose a destination:</label>
+      <label for="Destination">TO:</label>
         <select onChange={(event) =>  props.setDestination(event.target.value)} id="filter" name="filter">
             <option value="all" >All</option>
             <option value="VLC" >Valencia</option>
