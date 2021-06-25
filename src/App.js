@@ -4,7 +4,8 @@ import Destination from './components/Destination';
 
 function App() {
   const [flights, setFlights] = useState(null);
-  const url = "https://api.skypicker.com/flights?flyFrom=PRG&to=VLC&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=5&sort=date&asc=1";
+  const [destination, setDestination] = useState('VLC');
+  const url = `https://api.skypicker.com/flights?flyFrom=PRG&to=${destination}&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=5&sort=date&asc=1`;
 
   async function fetchAll() {
     const resp = await fetch(url);
@@ -16,10 +17,16 @@ function App() {
     fetchAll();
   }, []);
 
+  useEffect(() => {
+    fetchAll();
+  }, [destination]);
+
   return (
     <div className="App">
      
-      <Destination />
+      <Destination setDestination={setDestination} />
+
+      {flights ? flights.search_id : <p>loading</p>}
      
     </div>
   );
