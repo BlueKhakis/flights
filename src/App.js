@@ -4,6 +4,7 @@ import Destination from './components/Destination';
 import OriginDestination from './components/OriginDestination';
 import Flight from './components/Flight';
 import { DateTime } from 'luxon';
+import DirectButton from './components/DirectButton'
 
 function App() {
   const [flights, setFlights] = useState(null);
@@ -11,7 +12,7 @@ function App() {
   
   const [destination, setDestination] = useState('VLC');
   const [originDestination, setOriginDestination] = useState('PRG');
-  const [direct, setOriginDirect] = useState('PRG');
+  const [direct, setDirect] = useState(0);
 
   async function fetchDestination() {
     const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=5&sort=date&asc=1&direct_flights=${direct}`);
@@ -23,7 +24,7 @@ function App() {
   useEffect(() => {
     console.log('useEffect2')
     fetchDestination();
-  }, [destination, originDestination]);
+  }, [destination, originDestination, direct]);
 
   return (
     <div className="App">
@@ -31,7 +32,8 @@ function App() {
       <Destination setDestination={setDestination} />
       {/* <Destination setDestination={setOriginDestination} /> */}
 
-      <OriginDestination setOriginDestination={setOriginDestination}/>
+      <OriginDestination setOriginDestination={setOriginDestination} />
+      Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
 
 
       { flights ? 
@@ -45,7 +47,11 @@ function App() {
             </div>
           :
           
-          <p>loading</p>}
+        <p>loading</p>}
+      
+      
+      
+        
         
         </div>
   );
