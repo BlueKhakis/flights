@@ -16,27 +16,29 @@ function App() {
   const [destination, setDestination] = useState('VLC');
   const [originDestination, setOriginDestination] = useState('PRG');
   const [direct, setDirect] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('PRG');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQueryTwo, setSearchQueryTwo] = useState('');
   const [searchResults, setSearchResults] = useState(null);
 
-
+  console.log(destination)
   async function fetchDestination() {
     const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=${limit}&sort=date&asc=1&direct_flights=${direct}`);
     const data = await results.json();
-    
+    console.log(destination)
     setFlights(data);
 
-    console.log(data)
-    console.log(flights)
+
   }
 
   async function fetchSearch() {
-    const results = await fetch(`https://api.skypicker.com/locations?term=${searchQuery}&locale=en-US&location_types=airport&location_types=city&location_types=country&limit=10&active_only=true&sort=name`);
+    const results = await fetch(`https://api.skypicker.com/locations?type=id&id=${searchQuery}&locale={locale}&active_only={active_only}`);
     const data = await results.json();
     
+   
     setSearchResults(data);
-    console.log(flights)
-
+   
+   
+    setDestination(data.locations[0].id)
 
   }
 
@@ -46,14 +48,13 @@ function App() {
   useEffect(() => {
     
     fetchDestination();
-  }, [direct]);
+  }, [destination, direct]);
 
   useEffect(() => {
     
     fetchSearch();
-    console.log(searchQuery)
-    console.log(searchResults)
-  }, [searchQuery, direct]);
+
+  }, [searchQuery, searchQueryTwo, direct]);
 
   return (
     <div className="App">
@@ -64,6 +65,9 @@ function App() {
       <SearchBar setSearchQuery={setSearchQuery}/>
 
       <OriginDestination setOriginDestination={setOriginDestination} />
+
+      <SearchBar setSearchQueryTwo={setSearchQueryTwo}/>
+
       Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
   
       <Button fetchDestination={fetchDestination}/>
