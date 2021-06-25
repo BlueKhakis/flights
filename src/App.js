@@ -6,7 +6,8 @@ import SearchBar from './components/SearchBar';
 import LoadMoreButton from './components/LoadMoreButton'
 import Flight from './components/Flight';
 import { DateTime } from 'luxon';
-import DirectButton from './components/DirectButton'
+import DirectButton from './components/DirectButton';
+import Button from './components/Button';
 
 function App() {
   const [flights, setFlights] = useState(null);
@@ -34,10 +35,12 @@ function App() {
     console.log(flights)
   }
 
-  useEffect(() => {
-    
-    fetchDestination();
-  }, [destination, originDestination, limit, direct]);
+  // useEffect(() => {
+  //   console.log('useEffect2')
+  //   fetchDestination();
+  // }, [destination, originDestination, limit, direct]);
+
+
 
   useEffect(() => {
     
@@ -47,14 +50,18 @@ function App() {
   return (
     <div className="App">
      
-      <Destination setDestination={setDestination} />
+      
       {/* <Destination setDestination={setOriginDestination} /> */}
 
       <SearchBar setSearchQuery={setSearchQuery}/>
 
       <OriginDestination setOriginDestination={setOriginDestination} />
+      
+      <Destination setDestination={setDestination} />
+
       Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
 
+      <Button fetchDestination={fetchDestination}/>
 
       { flights ?  
           <div>
