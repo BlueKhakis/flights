@@ -38,7 +38,10 @@ function App() {
     setSearchResults(data);
    
    
-    setDestination(data.locations[0].id)
+    if (data ) 
+    {
+      setDestination(data.locations[0].id)
+    } 
 
   }
 
@@ -49,7 +52,7 @@ function App() {
     
     fetchDestination();
   }, [destination, direct]);
-
+// 
   useEffect(() => {
     
     fetchSearch();
