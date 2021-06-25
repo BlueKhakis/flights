@@ -38,10 +38,7 @@ function App() {
     setSearchResults(data);
    
    
-    if (data ) 
-    {
-      setDestination(data.locations[0].id)
-    } 
+    setDestination(data? data.locations[0].id : nul)
 
   }
 
