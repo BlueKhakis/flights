@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-//import Country from './Components/Country';
 import Destination from './components/Destination';
 
 function App() {
-  const [countries, setCountries] = useState(null);
-  const url = "https://restcountries.eu/rest/v2/all";
+  const [flights, setFlights] = useState(null);
+  const url = "https://api.skypicker.com/flights?flyFrom=PRG&to=VLC&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=5&sort=date&asc=1";
 
   async function fetchAll() {
     const resp = await fetch(url);
     const data = await resp.json();
-    console.log(data);
-    setCountries(data);
+    setFlights(data);
   }
 
   useEffect(() => {
@@ -20,11 +18,9 @@ function App() {
 
   return (
     <div className="App">
-     {
-       (countries || []).map((country,i) => (
-         <Country key={i} name={country.name} image={country.flag} />
-       ))
-     }
+     
+      <Destination />
+     
     </div>
   );
 }
