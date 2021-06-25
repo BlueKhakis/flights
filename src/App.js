@@ -9,12 +9,15 @@ import { DateTime } from 'luxon';
 import DirectButton from './components/DirectButton'
 import Button from './components/Button';
 
+<<<<<<< HEAD
 import './Button.css';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Bodyy from './components/Bodyy';
 
 
+=======
+>>>>>>> c56bf03d8f5de2244407b64b0991f298abc6c80d
 function App() {
   const [flights, setFlights] = useState(null);
   const [limit, setLimit] = useState(5)
@@ -23,6 +26,7 @@ function App() {
   const [originDestination, setOriginDestination] = useState('PRG');
   const [direct, setDirect] = useState(0);
   const [searchQuery, setSearchQuery] = useState('PRG');
+  const [searchQueryTwo, setSearchQueryTwo] = useState('VLC');
   const [searchResults, setSearchResults] = useState(null);
 
 
@@ -31,16 +35,19 @@ function App() {
     const data = await results.json();
     
     setFlights(data);
-    console.log(flights)
+
+
   }
 
   async function fetchSearch() {
-    const results = await fetch(`https://api.skypicker.com/locations?term=${searchQuery}&locale=en-US&location_types=airport&location_types=city&location_types=country&limit=10&active_only=true&sort=name`);
+    const results = await fetch(`https://api.skypicker.com/locations?type=id&id=${searchQuery}&locale={locale}&active_only={active_only}`);
     const data = await results.json();
     
+   
     setSearchResults(data);
-    console.log(flights)
-
+   
+    console.log(data)
+    setDestination(data.locations[0].id)
 
   }
 
@@ -50,14 +57,13 @@ function App() {
   useEffect(() => {
     
     fetchDestination();
-  }, [direct]);
+  }, [destination, direct]);
 
   useEffect(() => {
     
     fetchSearch();
-    console.log(searchQuery)
-    console.log(searchResults)
-  }, [searchQuery, direct]);
+
+  }, [searchQuery, searchQueryTwo, direct]);
 
   return (
     <div className="App">
@@ -72,6 +78,9 @@ function App() {
       <SearchBar setSearchQuery={setSearchQuery}/>
 
       <OriginDestination setOriginDestination={setOriginDestination} />
+
+      <SearchBar setSearchQueryTwo={setSearchQueryTwo}/>
+
       Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
   
       <Button fetchDestination={fetchDestination}/>
