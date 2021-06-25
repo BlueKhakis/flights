@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Destination from './components/Destination';
 import OriginDestination from './components/OriginDestination';
+import LoadMoreButton from './components/LoadMoreButton'
 import Flight from './components/Flight';
 import { DateTime } from 'luxon';
 
@@ -42,7 +43,7 @@ function App() {
               {flights.data.map((flight, i)=>  
                 <Flight flight={flight} key={i} />)
             }
-                <button onClick={ ()=>setLimit( limit +5 ) } > more flights </button>
+                <LoadMoreButton setLimit={setLimit} limit={limit} />
               </div>
             }
           </div> :
