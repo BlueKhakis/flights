@@ -1,4 +1,4 @@
-function DetailButton(props)
+function Button(props)
 {
     function handleSubmit(event)
     {
@@ -14,4 +14,4 @@ function DetailButton(props)
     )
 }
 
-export default DetailButton;
+export default Button;
