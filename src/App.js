@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Destination from './components/Destination';
+import { DateTime } from 'luxon';
 
 function App() {
   const [flights, setFlights] = useState(null);
@@ -26,10 +27,20 @@ function App() {
      
       <Destination setDestination={setDestination} />
 
-      {flights ? flights.search_id : <p>loading</p>}
+      {flights ?
+        <div>
+          Departure time
+        <p>{DateTime.fromMillis(flights.data[0].dTime * 1000).toFormat('hh:mm')}</p>
+        Arrival time
+          <p>{DateTime.fromMillis(flights.data[0].aTime * 1000).toFormat('hh:mm')}</p>
+          <p>{flights.data[0].country}</p>
+        </div>
+          : <p>loading</p>}
      
     </div>
   );
 }
 
 export default App;
+
+
