@@ -29,22 +29,25 @@ function App() {
     <div className="App">
      
       <Destination setDestination={setDestination} />
+      {/* <Destination setDestination={setOriginDestination} /> */}
 
       <OriginDestination setOriginDestination={setOriginDestination}/>
 
 
       { flights ? 
-      <div>
-
-        {flights.data.map((flight, i)=>  
-        <Flight flight={flight} key={i} />) }
-
+          <div>
+            {!flights.data.length ?
+              <p>no flights for selected route</p>
+              :
+              flights.data.map((flight, i)=>  
+              <Flight flight={flight} key={i} />) 
+            }
+            </div>
+          :
+          
+          <p>loading</p>}
+        
         </div>
-      :
-      
-      <p>loading</p>}
-     
-    </div>
   );
 }
 
