@@ -8,6 +8,13 @@ import Flight from './components/Flight';
 import { DateTime } from 'luxon';
 import DirectButton from './components/DirectButton'
 import Button from './components/Button';
+
+import './Button.css';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+import Bodyy from './components/Bodyy';
+
+
 function App() {
   const [flights, setFlights] = useState(null);
   const [limit, setLimit] = useState(5)
@@ -54,6 +61,10 @@ function App() {
 
   return (
     <div className="App">
+
+      <Navigation />
+
+      <Bodyy />
      
       <Destination setDestination={setDestination} />
       {/* <Destination setDestination={setOriginDestination} /> */}
@@ -86,7 +97,7 @@ function App() {
       
       
       
-        
+        <Footer />
         
         </div>
   );
