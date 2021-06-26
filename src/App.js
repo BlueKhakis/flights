@@ -16,15 +16,15 @@ function App() {
   const [destination, setDestination] = useState('VLC');
   const [originDestination, setOriginDestination] = useState('PRG');
   const [direct, setDirect] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchQueryTwo, setSearchQueryTwo] = useState('');
+  const [searchQuery, setSearchQuery] = useState('PRG');
+  const [searchQueryTwo, setSearchQueryTwo] = useState('VLC');
   const [searchResults, setSearchResults] = useState(null);
 
-  console.log(destination)
+
   async function fetchDestination() {
     const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=26/06/2021&dateTo=26/06/2021&partner=data4youcbp202106&v=3&limit=${limit}&sort=date&asc=1&direct_flights=${direct}`);
     const data = await results.json();
-    console.log(destination)
+    
     setFlights(data);
 
 
@@ -37,8 +37,8 @@ function App() {
    
     setSearchResults(data);
    
-   
-    setDestination(data? data.locations[0].id : nul)
+    console.log(data)
+    setDestination(data.locations[0].id)
 
   }
 
@@ -49,7 +49,7 @@ function App() {
     
     fetchDestination();
   }, [destination, direct]);
-// 
+
   useEffect(() => {
     
     fetchSearch();
@@ -57,19 +57,14 @@ function App() {
   }, [searchQuery, searchQueryTwo, direct]);
 
   return (
-    
     <div className="App">
-      {console.log(destination)}
-      
+     
       <OriginDestination setOriginDestination={setOriginDestination} />
       <Destination setDestination={setDestination} />
       {/* <Destination setDestination={setOriginDestination} /> */}
 
-      <SearchBar setSearchQuery={setSearchQuery}/>
-
-      <OriginDestination setOriginDestination={setOriginDestination} />
-
-      <SearchBar setSearchQueryTwo={setSearchQueryTwo}/>
+      fly from <SearchBar setSearchQuery={setSearchQuery}/>
+      fly to<SearchBar setSearchQuery={setSearchQueryTwo}/>
 
       Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
   
