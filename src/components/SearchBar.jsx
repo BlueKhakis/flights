@@ -6,15 +6,20 @@ function SearchBar(props) {
     {
       event.preventDefault()
       props.setSearchQuery(event.target[0].value)      
+      props.setSearchQueryTwo(event.target[1].value)      
     }
 
   return (
       
     <form onSubmit={(event) => handleSubmit(event)}>
     <div>
-      <input
+      From: <input
         type="text"
-        name="Search"
+        name="SearchFrom"
+      />
+       To:  <input
+        type="text"
+        name="SearchTo"
       />
     </div>
     <button type="submit">

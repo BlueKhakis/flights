@@ -4,15 +4,13 @@ import Destination from "./Destination";
 import OriginDestination from "./OriginDestination";
 
 
-
-
 function Button(props)
 {
 
     
     
     return (
-        <div className="button">
+        <div className="submit-button">
 
             <div className="container">
 

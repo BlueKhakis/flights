@@ -2,7 +2,7 @@ import {useState} from 'react';
 function Filter(props) {
   return (
     <div className="Filter">
-      <label for="filter">Choose a region:</label>
+      <label htmlfor="filter">Choose a region:</label>
         <select onChange={(event) =>  props.setRegion(event.target.value)} id="filter" name="filter">
             <option value="all" >All</option>
             <option value="region/americas" >Americas</option>
