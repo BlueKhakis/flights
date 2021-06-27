@@ -11,6 +11,8 @@ import Button from './components/Button';
 import Navigation from './components/Navigation';
 import Bodyy from './components/Bodyy';
 import Footer from './components/Footer';
+import DatePickerComp from './components/DatePickerComp';
+
 
 
 function App() {
@@ -22,10 +24,14 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('PRG');
   const [searchQueryTwo, setSearchQueryTwo] = useState('VLC');
   const [searchResults, setSearchResults] = useState(null);
+  const [dateFrom, setDateFrom] = useState('26/07/2021');
+  const [dateTo, setDateTo] = useState('26/08/2021');
+  const [formattedDateTo, setFormattedDateTo] = useState('26/08/2021');
+  const [formattedDateFrom, setFormattedDateFrom] = useState('26/08/2021');
 
 
   async function fetchDestination() {
-    const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=26/07/2021&dateTo=26/08/2021&partner=data4youcbp202106&v=3&limit=${limit}&sort=date&asc=1&direct_flights=${direct}`);
+    const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=${dateFrom}&dateTo=${dateTo}&partner=data4youcbp202106&v=3&limit=${limit}&sort=date&asc=1&direct_flights=${direct}`);
     const data = await results.json();
 
     setFlights(data);
@@ -47,20 +53,18 @@ function App() {
 
   useEffect(() => {
     fetchDestination();
-  }, [destination, originDestination, direct]);
+  }, [destination, originDestination, direct, dateTo, dateFrom, limit]);
 
   useEffect(() => {
     fetchSearch();
   }, [searchQuery, searchQueryTwo, direct]);
+
 
   return (
     <div className="App">
 
       {/* <Navigation />
       <Bodyy /> */}
-     
-
-
 
 
       <div className="search">
@@ -71,12 +75,18 @@ function App() {
       <SearchBar setSearchQuery={setSearchQuery} setSearchQueryTwo={setSearchQueryTwo}/>
       {/* To:  <SearchBar setSearchQueryTwo={setSearchQueryTwo}/> */}
 
+
+      <DatePickerComp setDateFrom={setDateFrom} setDateTo={setDateTo}/>
+
+
+
       Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
   
       <Button fetchDestination={fetchDestination}/>
 
       { flights ?  
           <div>
+
             {!flights.data.length ?
               <p>no flights for selected route</p>
               :
@@ -84,10 +94,11 @@ function App() {
               {flights.data.map((flight, i)=>  
                 <Flight flight={flight} key={i} />)
             }
-                {flights.data.length >= limit ?
-                <LoadMoreButton setLimit={setLimit} limit={limit} /> :
+                {/* {flights.data.length >= limit ? */}
+                <LoadMoreButton setLimit={setLimit} limit={limit} /> 
+                {/* :
                   <></>
-                }
+                } */}
               </div>
             }
           </div> :

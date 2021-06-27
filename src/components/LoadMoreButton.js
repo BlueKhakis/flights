@@ -3,11 +3,14 @@
 
 
 function LoadMore(props) {
-
+ function handleClick() {
+    props.setLimit( props.limit +5 )
+    console.log(props.limit)
+ }
   return (
     <div className="LoadMoreButton">
-        
-        <button onClick={ ()=>props.setLimit( props.limit +5 ) } > more flights </button>
+
+        <button onClick={ handleClick } > more flights </button>
      
     </div>
   );

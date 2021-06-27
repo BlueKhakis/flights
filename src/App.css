@@ -286,3 +286,8 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+.datePicker {
+  display: flex;
+  flex-direction: row;
+}
