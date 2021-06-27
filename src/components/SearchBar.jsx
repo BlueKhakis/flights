@@ -5,8 +5,11 @@ function SearchBar(props) {
     function handleSubmit(event)
     {
       event.preventDefault()
-      props.setSearchQuery(event.target[0].value)      
-      props.setSearchQueryTwo(event.target[1].value)      
+      props.setSearchQuery(event.target[0].value)  
+      console.log(event.target[0].value)    
+      console.log(event.target[1].value)    
+      props.setSearchQueryTwo(event.target[1].value)    
+      props.setRand(Math.random());
     }
 
   return (

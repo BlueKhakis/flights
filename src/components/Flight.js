@@ -12,7 +12,7 @@ function Flight(props) {
       <p>distance: {props.flight.distance}</p>
       <p>price: {props.flight.price}</p>
       <p>available seats:  {props.flight.availability.seats}</p>
-      <p>number of stopovers:  {props.flight.route.length}</p>
+      <p>number of stopovers:  {props.flight.route.length - 1  }</p>
       {/* <img src={props.image} alt={props.name} />
      <h2>{props.name}</h2> */}
      

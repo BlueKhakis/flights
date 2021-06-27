@@ -1,10 +1,15 @@
 import {useState} from 'react';
 
 function Destination(props) {
+  function handleSubmit(event)
+  {
+    props.setDestination(event.target.value)
+    props.setRandTwo(Math.random());
+  }
   return (
     <div className="Destination">
       <label htmlFor="Destination"> TO: </label>
-        <select onChange={(event) =>  props.setDestination(event.target.value)} id="filter" name="filter">
+        <select onChange={(event) => handleSubmit(event)} id="filter" name="filter">
             <option value="all" >All</option>
             <option value="VLC" >Valencia</option>
             <option value="BCN" >Barcelona</option>

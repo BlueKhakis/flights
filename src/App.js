@@ -28,9 +28,12 @@ function App() {
   const [dateTo, setDateTo] = useState('26/08/2021');
   const [formattedDateTo, setFormattedDateTo] = useState('26/08/2021');
   const [formattedDateFrom, setFormattedDateFrom] = useState('26/08/2021');
+  const [rand, setRand] = useState(0);
+  const [randTwo, setRandTwo] = useState(0);
 
 
   async function fetchDestination() {
+    console.log(destination);
     const results = await fetch(`https://api.skypicker.com/flights?flyFrom=${originDestination}&to=${destination}&dateFrom=${dateFrom}&dateTo=${dateTo}&partner=data4youcbp202106&v=3&limit=${limit}&sort=date&asc=1&direct_flights=${direct}`);
     const data = await results.json();
 
@@ -38,13 +41,16 @@ function App() {
   }
 
   async function fetchSearch() {
+    console.log(searchQuery);
+    console.log(searchQueryTwo);
     const results = await fetch(`https://api.skypicker.com/locations?type=id&id=${searchQuery}&locale={locale}&active_only={active_only}`);
     const data = await results.json();
     const results2 = await fetch(`https://api.skypicker.com/locations?type=id&id=${searchQueryTwo}&locale={locale}&active_only={active_only}`);
     const data2 = await results2.json();
-
+console.log(data2);
     setOriginDestination(data.locations[0].id)
     setDestination(data2.locations[0].id)
+    setRandTwo(Math.random())
   }
 
   
@@ -53,11 +59,11 @@ function App() {
 
   useEffect(() => {
     fetchDestination();
-  }, [destination, originDestination, direct, dateTo, dateFrom, limit]);
+  }, [randTwo, direct, dateTo, dateFrom, limit]);
 
   useEffect(() => {
     fetchSearch();
-  }, [searchQuery, searchQueryTwo, direct]);
+  }, [rand, direct]);
 
 
   return (
@@ -68,11 +74,11 @@ function App() {
 
 
       <div className="search">
-        <OriginDestination setOriginDestination={setOriginDestination} />
-        <Destination setDestination={setDestination} />
+        <OriginDestination setOriginDestination={setOriginDestination} setRandTwo={setRandTwo}/>
+        <Destination setDestination={setDestination} setRandTwo={setRandTwo}/>
       </div>
 
-      <SearchBar setSearchQuery={setSearchQuery} setSearchQueryTwo={setSearchQueryTwo}/>
+      <SearchBar setSearchQuery={setSearchQuery} setSearchQueryTwo={setSearchQueryTwo} setRand={setRand}/>
       {/* To:  <SearchBar setSearchQueryTwo={setSearchQueryTwo}/> */}
 
 
