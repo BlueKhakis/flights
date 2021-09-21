@@ -8,9 +8,9 @@ import Flight from './components/Flight';
 import { DateTime } from 'luxon';
 import DirectButton from './components/DirectButton'
 import Button from './components/Button';
-import Navigation from './components/Navigation';
-import Bodyy from './components/Bodyy';
-import Footer from './components/Footer';
+
+
+
 import DatePickerComp from './components/DatePickerComp';
 
 
@@ -24,8 +24,8 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('PRG');
   const [searchQueryTwo, setSearchQueryTwo] = useState('VLC');
   const [searchResults, setSearchResults] = useState(null);
-  const [dateFrom, setDateFrom] = useState('26/07/2021');
-  const [dateTo, setDateTo] = useState('26/08/2021');
+  const [dateFrom, setDateFrom] = useState('26/10/2021');
+  const [dateTo, setDateTo] = useState('26/11/2021');
   const [formattedDateTo, setFormattedDateTo] = useState('26/08/2021');
   const [formattedDateFrom, setFormattedDateFrom] = useState('26/08/2021');
   const [rand, setRand] = useState(0);
@@ -69,10 +69,9 @@ console.log(data2);
   return (
     <div className="App">
 
-      {/* <Navigation />
-      <Bodyy /> */}
 
 
+     <div className="se">
       <div className="search">
         <OriginDestination setOriginDestination={setOriginDestination} setRandTwo={setRandTwo}/>
         <Destination setDestination={setDestination} setRandTwo={setRandTwo}/>
@@ -89,7 +88,7 @@ console.log(data2);
       Direct flights only<DirectButton direct={direct} setDirect={setDirect} />
   
       <Button fetchDestination={fetchDestination}/>
-
+    </div>
       { flights ?  
           <div>
 
@@ -113,7 +112,7 @@ console.log(data2);
       
       
       
-        {/* <Footer /> */}
+
         
         </div>
   );

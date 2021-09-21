@@ -3,8 +3,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-image: url("https://news.paxeditions.com/storage/app/uploads/public/5ef/dea/ed6/thumb_105722_1200_1_0_0_auto.jpg"); */
+  background-image: url("./img/airport.jpg");
   background-size: contain;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 2500px;
+  /*  */
+  background-position: fixed;
+  /* background-size: contain; */
   background-color: rgba(0, 0, 0, 0.1);
   /* width: 100vw;
 
@@ -290,4 +296,48 @@ body {
 .datePicker {
   display: flex;
   flex-direction: row;
+}
+
+.se {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  width: 600px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25em;
+  margin: 50px;
+}
+
+.LoadMoreButton button {
+  background-color: #f8a251;
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 15px rgb(207, 206, 206);
+}
+
+.LoadMoreButton button:hover {
+  background-color: rgb(243, 197, 112);
+  margin-bottom: 25px;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: -4px 6px 15px rgb(209, 207, 207);
+  transition: box-shadow 0.3s linear;
+}
+
+.LoadMoreButton button:active {
+  background-color: rgb(189, 189, 189);
+  margin-bottom: 25px;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: -4px 6px 15px rgb(209, 207, 207);
+  transition: box-shadow 0.3s ease-out;
 }

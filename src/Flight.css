@@ -1,11 +1,95 @@
 * {
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  color: #1c3a63;
 }
 
 .Flight {
-  background-color: lightblue;
-  width: 300px;
-  border-radius: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 800px;
+  border-radius: 15px;
   padding: auto;
   margin: 10px;
+}
+
+.FlightDurDist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgb(215, 215, 215);
+  background: linear-gradient(
+    180deg,
+    rgb(240, 201, 130) 0%,
+    rgb(248, 162, 81) 100%
+  );
+  border-radius: 0px 10px 10px 0px;
+}
+
+.FlightFrom {
+  background: rgb(215, 215, 215);
+  background: linear-gradient(
+    180deg,
+    rgb(240, 201, 130) 0%,
+    rgb(248, 162, 81) 100%
+  );
+  border-radius: 15px 0px 0px 15px;
+}
+
+.FlightTo {
+  background: rgb(215, 215, 215);
+  background: linear-gradient(
+    180deg,
+    rgb(240, 201, 130) 0%,
+    rgb(248, 162, 81) 100%
+  );
+}
+
+.FlightDurDist p {
+  margin: 5px;
+}
+
+.FlightRest {
+  border-left: 2px dashed white;
+  background: rgb(215, 215, 215);
+  background: linear-gradient(
+    180deg,
+    rgb(240, 201, 130) 0%,
+    #f8a251 100%
+  );
+  border-radius: 10px 15px 15px 10px;
+}
+
+.FlightRest p {
+  margin: 7px;
+}
+
+.box {
+  width: 200px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.FlightRest button {
+  width: 80px;
+  height: 30px;
+}
+
+.boxCity {
+  font-size: 25px;
+}
+
+h3,
+h4 {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.light {
+  font-weight: 300;
 }
